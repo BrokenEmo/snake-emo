@@ -1,13 +1,17 @@
-// General constant for gameboard
+// ***************** GENERAL CONSTANT *************************
+
 const GAME_PIXEL_COUNT = 40;
 const SQUARE_OF_GAME_PIXEL_COUNT = Math.pow(GAME_PIXEL_COUNT, 2);
 const INITIAL_SCORE = 6;
 
 let totalFoodAte = 0;
 
+// ************************************************************
 
 
-// Gameboard const
+
+// ***************** GAMEBOARD *************************
+
 const gameContainer = document.querySelector('#gameContainer');
 
 const createGameBoardPixels = () => {
@@ -17,13 +21,16 @@ const createGameBoardPixels = () => {
         // console.log(`${gameContainer.innerHTML} <div class="gameBoardPixel" id="pixel${i}"></div>`);
     }
 }
-// const gameBoardPixels = document.querySelector('.gameBoardPixel');
+// getElementsByClassName returning HTMLColection
 const gameBoardPixels = document.getElementsByClassName('gameBoardPixel');
 console.log(gameBoardPixels);
 
+// ************************************************************
 
 
-// Food
+
+// *********************** FOOD *************************
+
 let currentFoodPosition = 0;
 const createFood = () => {
     // Remove previous food
@@ -35,17 +42,24 @@ const createFood = () => {
     gameBoardPixels[currentFoodPosition].classList.add('food');
 }
 
+// ******************************************************
 
 
-// Setting direction key
+
+// ***************** CONTROL FOR SNAKE *************************
+
+// TODO: include WASD control
 const LEFT_DIR = 'ArrowLeft';
 const UP_DIR = 'ArrowUp';
 const RIGHT_DIR = 'ArrowRight';
 const DOWN_DIR = 'ArrowDown';
 
+// **************************************************************
 
 
-// Set snake default direction
+
+// ******************* SNAKE DIRECTION *************************
+
 let snakeCurrentDirection = RIGHT_DIR;
 
 const changeDirection = newDirectionCode => {
@@ -64,18 +78,28 @@ const changeDirection = newDirectionCode => {
     }
 }
 
+// *******************************************************
 
 
-// Starting point of the snake is in the middle of the board
+
+// ***************** STARTING POINT FOR SNAKE *************************
+
 // TODO: fix this
 let currentSnakeHeadPosition = SQUARE_OF_GAME_PIXEL_COUNT / 2;
 let snakeLength = 500;
+
+// ********************************************************************
+
+
+
+// ***************** MAIN FUNCTION *************************
 
 // Make snake move continously by calling this function repeatedly
 const moveSnake = () => {
     switch (snakeCurrentDirection) {
         case LEFT_DIR:
-            --currentSnakeHeadPosition;
+            --currentSnakeHeadPosition; // This makes the snake move
+            // This make the snake appear onthe other side
             const isSnakeHeadAtLastGameBoardPixelTowardsLeft = 
                 currentSnakeHeadPosition % GAME_PIXEL_COUNT == GAME_PIXEL_COUNT - 1 || 
                 currentSnakeHeadPosition < 0;
@@ -84,7 +108,8 @@ const moveSnake = () => {
             }
             break;
         case UP_DIR:
-            currentSnakeHeadPosition = currentSnakeHeadPosition - GAME_PIXEL_COUNT;
+            currentSnakeHeadPosition = currentSnakeHeadPosition - GAME_PIXEL_COUNT; // This makes the snake move
+            // This make the snake appear onthe other side
             const isSnakeHeadAtLastGameBoardPixelTowardsUp = 
                 currentSnakeHeadPosition < 0;
 
@@ -93,7 +118,8 @@ const moveSnake = () => {
             }
             break;
         case RIGHT_DIR:
-            ++currentSnakeHeadPosition;
+            ++currentSnakeHeadPosition; // This makes the snake move
+            // This make the snake appear onthe other side
             const isSnakeHeadAtLastGameBoardPixelTowardsRight = 
                 currentSnakeHeadPosition % GAME_PIXEL_COUNT == 0;
             if (isSnakeHeadAtLastGameBoardPixelTowardsRight) {
@@ -101,7 +127,8 @@ const moveSnake = () => {
             }
             break;
         case DOWN_DIR:
-            currentSnakeHeadPosition = currentSnakeHeadPosition + GAME_PIXEL_COUNT;
+            currentSnakeHeadPosition = currentSnakeHeadPosition + GAME_PIXEL_COUNT; // This makes the snake move
+            // This make the snake appear onthe other side
             const isSnakeHeadAtLastGameBoardPixelTowardsDown = 
                 currentSnakeHeadPosition > SQUARE_OF_GAME_PIXEL_COUNT - 1;
             if (isSnakeHeadAtLastGameBoardPixelTowardsDown) {
@@ -112,9 +139,10 @@ const moveSnake = () => {
             break;
     }
 
+    // Predict next block
     let nextSnakeHeadPixel = gameBoardPixels[currentSnakeHeadPosition];
 
-    // Kill snake if it bites itself
+    // If snake head towards its body
     if (nextSnakeHeadPixel.classList.contains('snakeBodyPixel')) {
         // Stop moving snake
         clearInterval(moveSnakeInterval);
@@ -126,14 +154,15 @@ const moveSnake = () => {
         window.location.reload();
     }
 
-    // If not killed add the snake body
+    // Add pixel to snake body as it moving
     nextSnakeHeadPixel.classList.add('snakeBodyPixel');
 
-    // This function removes the snake body as the snake moving
+    // Removes the snake body as the snake moving
     // Also note that snakeLength is used as the timeout interval
     setTimeout(() => {
         nextSnakeHeadPixel.classList.remove('snakeBodyPixel');
     }, snakeLength);
+
 
     // If snake bites the food 
     if (currentSnakeHeadPosition == currentFoodPosition) {
@@ -148,17 +177,18 @@ const moveSnake = () => {
     }
 }
 
+// **************************************************************
 
 
+// ********************** STARTING POINT ************************
 
-// Create gameboard
-createGameBoardPixels();
-// Create initial food
-createFood();
+createGameBoardPixels(); // Create gameboard
+createFood(); // Create initial food
 
-// Move snake
-// the variable, 'moveSnakeInterval' is used to stop the snake on snake killed
-var moveSnakeInterval = setInterval(moveSnake, 80);
+// the variable, 'moveSnakeInterval' is used to stop the snake when snake killed
+var moveSnakeInterval = setInterval(moveSnake, 80); // Move snake
 
 // Call change direction function on keyboard key-down event
 addEventListener('keydown', (e) => changeDirection(e.key));
+
+// **************************************************************

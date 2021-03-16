@@ -49,10 +49,15 @@ const createFood = () => {
 // ***************** CONTROL FOR SNAKE *************************
 
 // TODO: include WASD control
-const LEFT_DIR = 'ArrowLeft';
-const UP_DIR = 'ArrowUp';
-const RIGHT_DIR = 'ArrowRight';
-const DOWN_DIR = 'ArrowDown';
+// const LEFT_DIR = 'ArrowLeft';
+// const UP_DIR = 'ArrowUp';
+// const RIGHT_DIR = 'ArrowRight';
+// const DOWN_DIR = 'ArrowDown';
+
+const LEFT_DIR = 'a';
+const UP_DIR = 'w';
+const RIGHT_DIR = 'd';
+const DOWN_DIR = 's';
 
 // **************************************************************
 

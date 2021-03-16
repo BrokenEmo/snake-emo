@@ -23,7 +23,6 @@ const createGameBoardPixels = () => {
 }
 // getElementsByClassName returning HTMLColection
 const gameBoardPixels = document.getElementsByClassName('gameBoardPixel');
-console.log(gameBoardPixels);
 
 // ************************************************************
 
@@ -49,15 +48,15 @@ const createFood = () => {
 // ***************** CONTROL FOR SNAKE *************************
 
 // TODO: include WASD control
-// const LEFT_DIR = 'ArrowLeft';
-// const UP_DIR = 'ArrowUp';
-// const RIGHT_DIR = 'ArrowRight';
-// const DOWN_DIR = 'ArrowDown';
+const LEFT_DIR = 'ArrowLeft';
+const UP_DIR = 'ArrowUp';
+const RIGHT_DIR = 'ArrowRight';
+const DOWN_DIR = 'ArrowDown';
 
-const LEFT_DIR = 'a';
-const UP_DIR = 'w';
-const RIGHT_DIR = 'd';
-const DOWN_DIR = 's';
+// const LEFT_DIR = 'a';
+// const UP_DIR = 'w';
+// const RIGHT_DIR = 'd';
+// const DOWN_DIR = 's';
 
 // **************************************************************
 
@@ -184,7 +183,7 @@ const moveSnake = () => {
 
 // **************************************************************
 
-
+// TODO: execute this in popup.js
 // ********************** STARTING POINT ************************
 
 createGameBoardPixels(); // Create gameboard

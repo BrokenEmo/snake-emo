@@ -8,6 +8,20 @@
 </head>
 <body>
 
+    <div id="popup" class="popup">
+        <h1 class="popup-title">Welcome to Pythons!</h1>
+        <p class="popup-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas corrupti nostrum dolor quam adipisci amet, dolore optio, facilis modi quidem excepturi temporibus? Ipsa dolor ab voluptate explicabo asperiores impedit voluptatem.
+        Accusantium necessitatibus illum maxime! Facere, excepturi. Culpa magni eius, tempora fugiat, perferendis nesciunt temporibus dolorem placeat eveniet excepturi, nulla nam nemo facilis. Sit explicabo repudiandae mollitia tempora non eum dolores!
+        Officiis libero voluptates amet, obcaecati facere consequuntur similique ipsa in tempore facilis, odio reprehenderit? Fugit commodi excepturi omnis officiis voluptatibus cum. Reiciendis ab eveniet, distinctio eos voluptatibus molestias mollitia similique!</p>
+        <form action="index.html" id="form">
+            <label for="usernameInput">Enter username</label>
+            <input type="text" id="usernameInput" placeholder="Enter username" autofocus required> 
+            <button type="submit" class="btn-close">Start</button>
+        </form>
+    </div>
+
+    <h1 id="gameTitle">Hello, <span id="username"></span></h1>
+
     <!-- Mainboard -->
     <div id="gameContainer"></div>
 
@@ -16,6 +30,8 @@
         <div class="scoreBoard">Score: <span id="pointsEarned">6</span></div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="app.js"></script>
+<script src="popup.js"></script>
 </body>
 </html>
